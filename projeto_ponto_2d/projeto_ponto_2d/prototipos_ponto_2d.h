@@ -6,6 +6,10 @@ struct Ponto {
 	float x;
 	float y;
 };
+/*
+NÃO CONSEGUI DESCOBRIR UM JEITO DE FAZER A DEFINIÇÃO DO STRUCT NO ARQUIVO .CPP
+AO INVÉS DE AQUI NO .H. SEMPRE DAVA UM ERRO COMO SE NÃO IDENTIFICASSE O STRUCT LÁ.
+*/
 
 // função para cria pontos
 Ponto cria_ponto(float x, float y);

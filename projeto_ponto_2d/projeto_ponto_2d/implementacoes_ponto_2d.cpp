@@ -22,13 +22,21 @@ float distancia_entre_pontos(Ponto a, Ponto b) {
 }
 
 bool modifica_ponto(Ponto* p, float x, float y) {
-	p->x = x;
-	p->y = y;
-	return true;
+	if (&p && x && y) {
+		p->x = x;
+		p->y = y;
+		return true;
+	}
+	return false;
 }
 
 bool acessa_ponto(Ponto p, float* x, float* y) {
-	*x = p.x;
-	*y = p.y;
-	return true;
+	if (p.x && p.y) {
+		if (x && y) {
+			*x = p.x;
+			*y = p.y;
+			return true;
+		}		
+	}
+	return false;
 }
