@@ -19,7 +19,7 @@ float distancia_entre_pontos(Ponto a, Ponto b);
 // função para exibir as coordenadas de um ponto
 void imprime_ponto(Ponto p);
 
-//void libera_ponto(Ponto* p); !não precisa alocar dinamicamente!
-//bool acessa_ponto(Ponto p, float* x, float* y); !já temos acesso direto!
+// função para extrair coordenadas do ponto
+bool acessa_ponto(Ponto p, float* x, float* y);
 
 #endif

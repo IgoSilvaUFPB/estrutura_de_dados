@@ -26,3 +26,9 @@ bool modifica_ponto(Ponto* p, float x, float y) {
 	p->y = y;
 	return true;
 }
+
+bool acessa_ponto(Ponto p, float* x, float* y) {
+	*x = p.x;
+	*y = p.y;
+	return true;
+}
