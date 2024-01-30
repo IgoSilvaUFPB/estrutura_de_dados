@@ -35,6 +35,7 @@ int main(void) {
 		float nxa = 0, nya = 0, nxb = 0, nyb = 0;
 		float ptx=0, pty=0;
 
+		cout << endl;
 		cout << "== OPCOES ==" << endl;
 		cout << "1. Quero alterar o ponto A" << endl;
 		cout << "2. Quero alterar o ponto B" << endl;
@@ -46,9 +47,9 @@ int main(void) {
 		cout << "8. Exibir coordenadas do ponto B" << endl;
 		cout << "9. Sair" << endl;
 		cin >> menu;
-
+		system("cls");
 		switch(menu) {
-		case(1):			
+		case(1):
 			cout << "indique a coordenada x do ponto A" << endl;
 			cin >> nxa;
 			cout << "indique a coordenada y do ponto A" << endl;
