@@ -37,6 +37,7 @@ int main(void) {
 		float ptx=0, pty=0;
 
 		// exibe menu
+		cout << endl;
 		cout << "== OPCOES ==" << endl;
 		cout << "1. Quero alterar o ponto A" << endl;
 		cout << "2. Quero alterar o ponto B" << endl;

@@ -35,6 +35,7 @@ int main(void) {
 		float nxa = 0, nya = 0, nxb = 0, nyb = 0, ptx = 0, pty = 0;
 
 		// exibe menu
+		cout << endl;
 		cout << "== OPCOES ==" << endl;
 		cout << "1. Alterar coordenadas do ponto A" << endl;
 		cout << "2. Alterar coordenadas do ponto B" << endl;
