@@ -61,7 +61,7 @@ int main(void) {
 			modifica_ponto(&ptA, nxa, nya);
 			break;
 		case(2):
-			// altera coordenadas do ponto B
+			// alterar coordenadas do ponto B
 			cout << "indique a coordenada x do ponto B" << endl;
 			cin >> nxb;
 			cout << "indique a coordenada y do ponto B" << endl;

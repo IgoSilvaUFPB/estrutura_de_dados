@@ -15,7 +15,7 @@ AO INVÉS DE AQUI NO .H. SEMPRE DAVA UM ERRO COMO SE NÃO IDENTIFICASSE O STRUCT L
 Ponto cria_ponto(float x, float y);
 
 // função para modificar as coordenadas de um ponto
-bool modifica_ponto(Ponto* p, float x, float y);
+void modifica_ponto(Ponto* p, float x, float y);
 
 // função para calcular a distância entre dois pontos
 float distancia_entre_pontos(Ponto a, Ponto b);
@@ -24,6 +24,6 @@ float distancia_entre_pontos(Ponto a, Ponto b);
 void imprime_ponto(Ponto p);
 
 // função para extrair coordenadas do ponto
-bool acessa_ponto(Ponto p, float* x, float* y);
+void acessa_ponto(Ponto p, float* x, float* y);
 
 #endif
