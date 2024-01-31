@@ -1,2 +1,5 @@
-﻿  main.cpp
+﻿  implementacoes_ponto_2d.cpp
+C:\Users\igofe\OneDrive - Universidade Federal da Paraíba\CDIA_P3\estrutura_de_dados\projeto_ponto_2d - dinamico\projeto_ponto_2d\implementacoes_ponto_2d.cpp(35,18): warning C4244: 'inicializando': conversão de 'double' para 'float', possível perda de dados
+  main.cpp
+  Gerando Código...
   projeto_ponto_2d.vcxproj -> C:\Users\igofe\OneDrive - Universidade Federal da Paraíba\CDIA_P3\estrutura_de_dados\projeto_ponto_2d - dinamico\x64\Debug\projeto_ponto_2d.exe

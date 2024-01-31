@@ -1,6 +1,7 @@
 #ifndef PROTOTIPOS_PONTO_2D_H
 #define PROTOTIPOS_PONTO_2D_H
 
+// cria tipo Ponto com base no struct
 typedef struct ponto Ponto;
 
 // função para cria pontos
@@ -15,8 +16,10 @@ float distancia_entre_pontos(Ponto* a, Ponto* b);
 // função para exibir as coordenadas de um ponto
 void imprime_ponto(Ponto* p);
 
-void libera_ponto(Ponto** p);
-
+// função para extrair coordenadas do ponto
 bool acessa_ponto(Ponto* p, float* x, float* y);
+
+// função para liberar espaço de memória
+void libera_ponto(Ponto** p);
 
 #endif
