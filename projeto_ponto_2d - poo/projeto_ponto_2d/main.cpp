@@ -22,10 +22,8 @@ int main(void) {
 	// cria ponto 2
 	Ponto ptB(xb, yb);
 
-	//variável de controle
-	int i = 0;
-
-	system("cls");
+	// variável de controle para saída do loop
+	int i = 0;	
 
 	do {
 		
@@ -33,10 +31,12 @@ int main(void) {
 		float dist = ptA.distancia_entre_pontos(ptB);
 		cout << "A distancia entre os pontos A e B: " << dist << endl;
 
+		// inicializa variáveis
 		int menu = 0;
 		float nxa = 0, nya = 0, nxb = 0, nyb = 0;
 		float ptx=0, pty=0;
 
+		// exibe menu
 		cout << "== OPCOES ==" << endl;
 		cout << "1. Quero alterar o ponto A" << endl;
 		cout << "2. Quero alterar o ponto B" << endl;
@@ -49,58 +49,62 @@ int main(void) {
 		cout << "9. Sair" << endl;
 		cin >> menu;
 
+		// limpa a tela
+		system("cls");
+
+		// alterna conforme opção selecionada
 		switch(menu) {
 		case(1):
-			system("cls");
+			// alterar coordenadas do ponto A
 			cout << "indique a coordenada x do ponto A" << endl;
 			cin >> nxa;
 			cout << "indique a coordenada y do ponto A" << endl;
 			cin >> nya;
 			ptA.modifica_ponto(nxa, nya);
-			system("cls");
 			break;
 		case(2):
-			system("cls");
+			// alterar coordenadas do ponto B
 			cout << "indique a coordenada x do ponto B" << endl;
 			cin >> nxb;
 			cout << "indique a coordenada y do ponto B" << endl;
 			cin >> nyb;
 			ptB.modifica_ponto(nxb, nyb);
-			system("cls");
 			break;
 		case(3):
-			system("cls");
+			// acessar x do ponto A
 			ptA.acessa_ponto(&ptx, &pty);
 			cout << "coordenada x do ponto A: " << ptx << endl;
 			break;
 		case(4):
-			system("cls");
+			// acessar y do ponto A
 			ptA.acessa_ponto(&ptx, &pty);
 			cout << "coordenada y do ponto A: " << pty << endl;
 			break;
 		case(5):
-			system("cls");
+			// acessar x do ponto B
 			ptB.acessa_ponto(&ptx, &pty);
 			cout << "coordenada x do ponto B: " << ptx << endl;
 			break;
 		case(6):
-			system("cls");
+			// acessar y do ponto B
 			ptB.acessa_ponto(&ptx, &pty);
 			cout << "coordenada y do ponto B: " << pty << endl;
 			break;
 		case(7):
-			system("cls");
+			// exibir coordenadas do ponto A
 			ptA.imprime_ponto();
 			break;
 		case(8):
-			system("cls");
+			// exibir coordenadas do ponto B
 			ptB.imprime_ponto();
 			break;
 		case(9):
+			// sair do programa
 			i = 1;
 			break;
 		default:
-			cout << "Opcao invalida!";
+			// alerta de opção inválida
+			cout << "Opcao invalida!" << endl;
 			break;
 		}
 		

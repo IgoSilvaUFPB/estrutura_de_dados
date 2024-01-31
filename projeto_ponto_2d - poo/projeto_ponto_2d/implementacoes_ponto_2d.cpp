@@ -1,10 +1,14 @@
 #include <iostream>
 #include "prototipos_ponto_2d.h"
-// biblioteca de operações matemáticas
 #include <cmath>
 using namespace std;
 
 Ponto::Ponto(float novo_x, float novo_y) {
+	x = novo_x;
+	y = novo_y;
+}
+
+void Ponto::modifica_ponto(float novo_x, float novo_y) {
 	x = novo_x;
 	y = novo_y;
 }
@@ -19,14 +23,7 @@ void Ponto::imprime_ponto() {
 	cout << "y do ponto = " << y << endl;
 }
 
-bool Ponto::modifica_ponto(float novo_x, float novo_y) {
-	x = novo_x;
-	y = novo_y;
-	return true;
-}
-
-bool Ponto::acessa_ponto(float* coord_x, float* coord_y) {
+void Ponto::acessa_ponto(float* coord_x, float* coord_y) {
 	*coord_x = x;
 	*coord_y = y;
-	return true;
 }

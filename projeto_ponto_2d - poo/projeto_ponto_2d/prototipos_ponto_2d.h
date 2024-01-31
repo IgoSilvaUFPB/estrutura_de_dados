@@ -6,10 +6,10 @@ class Ponto {
 	float y;
 public:
 	Ponto(float novo_x, float novo_y);
-	bool modifica_ponto(float novo_x, float novo_y);
+	void modifica_ponto(float novo_x, float novo_y);
 	float distancia_entre_pontos(Ponto B);
 	void imprime_ponto();
-	bool acessa_ponto(float* coord_x, float *coord_y);
+	void acessa_ponto(float* coord_x, float *coord_y);
 };
 
 #endif
