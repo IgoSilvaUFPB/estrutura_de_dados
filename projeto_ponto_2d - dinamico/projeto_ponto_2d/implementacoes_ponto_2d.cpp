@@ -38,6 +38,9 @@ float distancia_entre_pontos(Ponto* a, Ponto* b) {
 
 // função para exibir as coordenadas de um ponto
 void imprime_ponto(Ponto* p) {
+	if (!p) {
+		return;
+	}
 	cout << "x do ponto = " << p->x << endl;
 	cout << "y do ponto = " << p->y << endl;
 }
