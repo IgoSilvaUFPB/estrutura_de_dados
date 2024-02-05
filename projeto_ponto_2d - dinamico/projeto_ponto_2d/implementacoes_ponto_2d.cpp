@@ -1,3 +1,6 @@
+#ifndef IMPLEMENTACOES_PONTO_2D_CPP
+#define IMPLEMENTACOES_PONTO_2D_CPP
+
 #include <iostream>
 #include "prototipos_ponto_2d.h"
 #include <cmath>
@@ -32,6 +35,9 @@ bool modifica_ponto(Ponto* p, float x, float y) {
 
 // função para calcular a distância entre dois pontos
 float distancia_entre_pontos(Ponto* a, Ponto* b) {
+	if (!a || !b) {
+		return -1;
+	}
 	float distancia = sqrt(pow(a->x - b->x, 2) + pow(a->y - b->y, 2));
 	return distancia;
 }
@@ -47,7 +53,7 @@ void imprime_ponto(Ponto* p) {
 
 // função para extrair coordenadas do ponto
 bool acessa_ponto(Ponto* p, float* ptx, float* pty) {
-	if (!p) {
+	if (!p || !ptx || !pty) {
 		return false;
 	}
 	*ptx = p->x;
@@ -62,3 +68,5 @@ void libera_ponto(Ponto** p) {
 		*p = NULL;
 	}	
 }
+
+#endif
