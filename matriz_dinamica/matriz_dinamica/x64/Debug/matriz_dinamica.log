@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\Users\igofe\OneDrive - Universidade Federal da Paraíba\CDIA_P3\estrutura_de_dados\matriz_dinamica\matriz_dinamica\main.cpp(13,14): warning C4305: 'inicializando': truncamento de 'double' para 'float'
+  matriz_dinamica.vcxproj -> C:\Users\igofe\OneDrive - Universidade Federal da Paraíba\CDIA_P3\estrutura_de_dados\matriz_dinamica\x64\Debug\matriz_dinamica.exe
