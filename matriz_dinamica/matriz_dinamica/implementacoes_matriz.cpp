@@ -58,7 +58,7 @@ void exibe_matriz(Matriz* m) {
 
 // acesso a um elemento da matriz
 bool acessa_elemento(Matriz* m, int linha, int coluna, float* copia) {
-	if (!m || !m->elementos || !copia) {
+	if (!m || !m->elementos || !copia || linha > m->num_linhas || linha < 0 || coluna > m->num_colunas || coluna < 0) {
 		return false;
 	}
 	*copia = m->elementos[(linha * m->num_colunas) + coluna];
@@ -67,7 +67,7 @@ bool acessa_elemento(Matriz* m, int linha, int coluna, float* copia) {
 
 // mofificação de um elemento da matriz
 bool modifica_elemento(Matriz* m, int linha, int coluna, float valor) {
-	if (!m || !m->elementos) {
+	if (!m || !m->elementos || linha > m->num_linhas || linha < 0 || coluna > m->num_colunas || coluna < 0) {
 		return false;
 	}
 	m->elementos[(linha * m->num_colunas) + coluna] = valor;
