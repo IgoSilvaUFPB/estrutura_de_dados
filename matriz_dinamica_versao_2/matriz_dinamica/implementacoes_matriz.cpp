@@ -42,7 +42,7 @@ Matriz* cria_matriz(int linhas, int colunas) {
 
 // preenchimento da matriz
 bool preenche_matriz(Matriz* m) {
-	if (!m || !m->elementos) {
+	if (!m) {
 		return false;
 	}
 	for (int i = 0; i < m->num_linhas; i++) {
@@ -56,7 +56,7 @@ bool preenche_matriz(Matriz* m) {
 
 // exibição da matriz inteira
 void exibe_matriz(Matriz* m) {
-	if (!m || !m->elementos) {
+	if (!m) {
 		return;
 	}
 	for (int i = 0; i < m->num_linhas; i++) {
@@ -69,7 +69,7 @@ void exibe_matriz(Matriz* m) {
 
 // acesso a um elemento da matriz
 bool acessa_elemento(Matriz* m, int linha, int coluna, float* copia) {
-	if (!m || !m->elementos[linha][coluna] || !copia || linha > m->num_linhas || linha < 0 || coluna > m->num_colunas || coluna < 0) {
+	if (!m || !copia || linha > m->num_linhas || linha < 0 || coluna > m->num_colunas || coluna < 0) {
 		return false;
 	}
 	*copia = m->elementos[linha][coluna];
@@ -78,7 +78,7 @@ bool acessa_elemento(Matriz* m, int linha, int coluna, float* copia) {
 
 // mofificação de um elemento da matriz
 bool modifica_elemento(Matriz* m, int linha, int coluna, float valor) {
-	if (!m || !m->elementos[linha][coluna] || linha > m->num_linhas || linha < 0 || coluna > m->num_colunas || coluna < 0) {
+	if (!m || linha > m->num_linhas || linha < 0 || coluna > m->num_colunas || coluna < 0) {
 		return false;
 	}
 	m->elementos[linha][coluna] = valor;
@@ -87,12 +87,17 @@ bool modifica_elemento(Matriz* m, int linha, int coluna, float valor) {
 
 // liberação do espaço de memória alocado
 void destroi_matriz(Matriz** m) {
-	if (!*m || !(*m)->elementos) {
+	if (!*m) {
 		return;
 	}
-	delete[] ((*m)->elementos);
-	(*m)->elementos = NULL;
-	delete(*m);
+	// desalocando vetores das linhas
+	for (int i = 0; i < (*m)->num_linhas; i++) {
+		delete[] (*m)->elementos[i];
+	}
+	// desalocando vetor dos ponteiros das linhas
+	delete[] (*m)->elementos;
+	// desalocando matriz
+	delete (*m);
 	*m = NULL;
 }
 
