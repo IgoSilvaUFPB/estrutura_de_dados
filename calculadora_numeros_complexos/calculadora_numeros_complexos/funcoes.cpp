@@ -5,7 +5,6 @@
 #include "prototipos_funcoes.h"
 
 using std::cout;
-using std::endl;
 
 // criando complexo
 Complexo cria_complexo(float r, float i) {
@@ -54,6 +53,5 @@ Complexo divide(Complexo a, Complexo b) {
 
 	return resultado;
 }
-
 
 #endif

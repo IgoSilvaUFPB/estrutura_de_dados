@@ -1,11 +1,13 @@
 #ifndef PROTOTIPOS_FUNCOES_H
 #define PROTOTIPOS_FUNCOES_H
 
+// definição da estrutura
 struct ncomplexo {
 	float real;
 	float img;
 };
 
+// criando tipo a partir da estrutura
 typedef struct ncomplexo Complexo;
 
 // criando complexo
