@@ -14,15 +14,11 @@ int main(void) {
 
         // exibe o titulo
         cout << "LISTA SIMPLESMENTE ENCADEADA" << endl;
-        tamanho_lista(l);
+        int t = tamanho_lista(l);
+        cout << "Tamanho da lista: " << t << endl;
 
         // exibe a lista
-        if (tamanho_lista(l) == 0) {
-            cout << "[Lista vazia]" << endl;
-        }
-        else {
-            imprime_lista(l);
-        }
+        imprime_lista(l);
 
         // exibir menu
         cout << "MENU" << endl;
