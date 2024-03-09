@@ -142,7 +142,7 @@ bool reordenar_lista(Lista* l) {
     // ordenando a lista
     while (true) {
         // se o primeiro for maior que o segundo
-        while (l->inicio->info > l->inicio->prox->info) {
+        if (l->inicio->info > l->inicio->prox->info) {
             l->inicio = aux1->prox;
             aux1->prox = aux1->prox->prox;
             l->inicio->prox = aux1;
@@ -177,6 +177,12 @@ bool modifica_info(Lista* l, int info, int novo_info) {
         return false;
     }
     No* aux = l->inicio;
+    // caso lista só tenha um nó
+    if (aux->prox == NULL && aux->info == info) {
+        aux->info = novo_info;
+        return true;
+    }
+    // buscando info na lista
     while (aux->info != info && aux->prox != NULL) {
         aux = aux->prox;
     }
@@ -189,6 +195,7 @@ bool modifica_info(Lista* l, int info, int novo_info) {
     reordenar_lista(l);
     // mais fácil que criar uma função para reordenar a lista
     // seria simplesmente remover e re-inserir a info
+    // mas não teria graça
     return true;
 }
 
@@ -207,8 +214,8 @@ void imprime_lista(Lista* l) {
             cout << "[" << aux->info << "] ";
             aux = aux->prox;
         }
-    }
-    cout << endl;
+        cout << endl;
+    }    
 }
 
 void libera_lista(Lista** l) {

@@ -62,7 +62,6 @@ int main(void) {
             break;
         }
     }
-
     // libera lista
     libera_lista(&l);
     return 0;
