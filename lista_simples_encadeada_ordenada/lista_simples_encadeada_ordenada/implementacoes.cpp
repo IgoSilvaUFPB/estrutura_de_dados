@@ -41,7 +41,7 @@ int tamanho_lista(Lista* l) {
     if (aux->prox == NULL) {
         return 1;
     }
-    // percorre a lista até encontrar NULL
+    // percorre a lista atÃ© encontrar NULL
     i++;
     while (aux->prox != NULL) {
         aux = aux->prox;
@@ -82,7 +82,7 @@ bool insere_info(Lista* l, int info) {
         novo_no->prox = aux;
         return true;
     }
-    // busca posição adequada na lista
+    // busca posiÃ§Ã£o adequada na lista
     while (aux->prox != NULL && aux->prox->info < info) {
         aux = aux->prox;
     }
@@ -117,12 +117,12 @@ bool remove_info(Lista* l, int info) {
     while (aux1->prox != NULL && aux1->prox->info != info) {
         aux1 = aux1->prox;
     }
-    // info não foi encontrada
+    // info nÃ£o foi encontrada
     if (aux1->prox == NULL) {
         return false;
     }
     No* aux2 = l->inicio;
-    // excluindo o nó
+    // excluindo o nÃ³
     aux2 = aux1->prox;
     aux1->prox = aux2->prox;
     free(aux2);
@@ -149,16 +149,16 @@ bool reordenar_lista(Lista* l) {
             aux1 = l->inicio;
             aux2 = l->inicio;
         }
-        // procurando inversões
+        // procurando inversÃµes
         while (aux1->prox->info >= aux1->info && aux1->prox != NULL) {
             aux2 = aux1;
             aux1 = aux1->prox;
-            // chegou ao final sem encontra inversões
+            // chegou ao final sem encontra inversÃµes
             if (aux1->prox == NULL) {
                 return true;
             }
         }
-        // invertendo posições
+        // invertendo posiÃ§Ãµes
         aux2->prox = aux1->prox;
         aux1->prox = aux1->prox->prox;
         aux2->prox->prox = aux1;
@@ -180,13 +180,15 @@ bool modifica_info(Lista* l, int info, int novo_info) {
     while (aux->info != info && aux->prox != NULL) {
         aux = aux->prox;
     }
-    // info não foi encontrada
+    // info nÃ£o foi encontrada
     if (aux->prox == NULL && aux->info != info) {
         return false;
     }
     // alterando info
     aux->info = novo_info;
     reordenar_lista(l);
+    // mais fÃ¡cil que criar uma funÃ§Ã£o para reordenar a lista
+    // seria simplesmente remover e re-inserir a info
     return true;
 }
 
@@ -213,7 +215,7 @@ void libera_lista(Lista** l) {
     if (!(*l)) {
         return;
     }    
-    // caso a lista esteja não vazia, remove os nós
+    // caso a lista esteja nÃ£o vazia, remove os nÃ³s
     if ((*l)->inicio != NULL) {
         int s = tamanho_lista(*l);
         No* aux = (*l)->inicio;
