@@ -139,8 +139,8 @@ bool reordenar_lista(Lista* l) {
     }
     No* aux1 = l->inicio;
     No* aux2 = l->inicio;    
-    // ordenando após o primeiro
-    while (aux1->prox != NULL) {
+    // ordenando a lista
+    while (true) {
         // se o primeiro for maior que o segundo
         while (l->inicio->info > l->inicio->prox->info) {
             l->inicio = aux1->prox;
@@ -149,14 +149,16 @@ bool reordenar_lista(Lista* l) {
             aux1 = l->inicio;
             aux2 = l->inicio;
         }
-        // percorrendo a lista
+        // procurando inversões
         while (aux1->prox->info >= aux1->info && aux1->prox != NULL) {
             aux2 = aux1;
             aux1 = aux1->prox;
+            // chegou ao final sem encontra inversões
             if (aux1->prox == NULL) {
                 return true;
             }
         }
+        // invertendo posições
         aux2->prox = aux1->prox;
         aux1->prox = aux1->prox->prox;
         aux2->prox->prox = aux1;
