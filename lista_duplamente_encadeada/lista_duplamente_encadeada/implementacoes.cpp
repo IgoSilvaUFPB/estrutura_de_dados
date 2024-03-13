@@ -144,20 +144,20 @@ bool remove_info(Listad* ld, int info) {
 		ld->inicio->ant = NULL;
 		return true;
 	}
+	Nod* aux = ld->inicio;
+	// buscando info
+	while (aux->prox != NULL && aux->info != info) {
+		aux = aux->prox;
+	}
 	// removendo o último
-	if (ld->fim->info == info) {
+	if (aux->prox == NULL && aux->info == info) {
 		ld->fim = ld->fim->ant;
-		delete(ld->fim->prox);
+		delete(aux);
 		ld->fim->prox = NULL;
 		return true;
 	}
-	Nod* aux = ld->inicio;
-	// buscando info
-	while (aux != NULL && aux->info != info) {
-		aux = aux->prox;
-	}
 	// info não encontrada
-	if (aux == NULL) {
+	if (aux->prox == NULL) {
 		return false;
 	}
 	// removendo no meio
@@ -165,6 +165,21 @@ bool remove_info(Listad* ld, int info) {
 	aux->prox->ant = aux->ant;
 	delete(aux);
 	return true;
+}
+
+bool altera_info(Listad* ld, int info, int novainfo) {
+	if (!ld) {
+		return false;
+	}
+	Nod* aux = ld->inicio;
+	while (aux->info != info && aux != NULL) {
+		aux = aux->prox;
+	}
+	if (aux != NULL) {
+		aux->info = novainfo;
+		return true;
+	}
+	return false;
 }
 
 void imprime_lista(Listad* ld) {

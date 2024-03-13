@@ -24,6 +24,7 @@ bool insere_inicio(Listad* ld, int info);
 bool insere_fim(Listad* ld, int info);
 bool insere_meio(Listad* ld, int info, int pos);
 bool remove_info(Listad* ld, int info);
+bool altera_info(Listad* ld, int info, int novainfo);
 void imprime_lista(Listad* ld);
 
 #endif
