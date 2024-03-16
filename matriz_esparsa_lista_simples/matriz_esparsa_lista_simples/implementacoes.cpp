@@ -39,7 +39,66 @@ Mesparsa* cria_mesparsa() {
 	return m;
 }
 
-//void libera_mesparsa(Mesparsa* matriz);
+int qtd_linhas(Mesparsa* m) {
+	if (!m) {
+		return 0;
+	}
+	if (m->inicio == NULL) {
+		return 0;
+	}
+	int count = 1;
+	Linha* aux = m->inicio;
+	while (aux->prox != NULL) {
+		aux = aux->prox;
+		count++;
+	}
+	return count;
+}
+
+int qtd_nnz(Linha* linha) {
+	if (!linha) {
+		return 0;
+	}
+	if (linha->inicio == NULL) {
+		return 0;
+	}
+	int count = 1;
+	Nnz* aux2 = linha->inicio;
+	while (aux2->prox != NULL) {
+		aux2 = aux2->prox;
+		count++;
+	}
+	return count;
+}
+
+void libera_mesparsa(Mesparsa** matriz) {
+	if (!(*matriz)) {
+		return;
+	}
+	// liberando as linhas
+	if ((*matriz)->inicio != NULL) {		
+		Linha* aux = (*matriz)->inicio;
+		int ql = qtd_linhas((*matriz));
+		for (int i = 0; i < ql; i++) {
+			// liberando os nnz
+			if (aux->inicio != NULL) {
+				Nnz* aux2 = aux->inicio;
+				int qnnz = qtd_nnz(aux);
+				for (int j = 0; j < qnnz; j++) {
+					aux->inicio = aux2->prox;
+					delete(aux2);
+					aux2 = aux->inicio;
+				}
+			}
+			(*matriz)->inicio = aux->prox;
+			delete(aux);
+			aux = (*matriz)->inicio;
+		}
+	}
+	// libera a matriz
+	delete((*matriz));
+	*matriz = NULL;
+}
 
 bool insere_na_linha(Linha* l, int linha, int coluna, double info) {
 	// caso linha vazia
@@ -137,7 +196,50 @@ bool insere_nnz(Mesparsa* matriz, int linha, int coluna, double info) {
 	return insere_na_linha(l, linha, coluna, info); // insere nnz na linha
 }
 
-//bool remove_nnz(Mesparsa* matriz, int linha, int coluna, double info);
+bool remove_nnz(Mesparsa* matriz, int linha, int coluna) {
+	if (!matriz) {
+		return false;
+	}
+	// caso matriz vazia
+	if (matriz->inicio == NULL) {
+		return false;
+	}
+	// buscando linha
+	Linha* aux = matriz->inicio;
+	while (aux != NULL && aux->linha != linha) {
+		aux = aux->prox;
+	}
+	// caso linha não encontrada
+	if (aux == NULL) {
+		return false;
+	}
+	// caso linha encontrada
+	// caso linha vazia
+	if (aux->inicio == NULL) {
+		return false;
+	}
+	Nnz* aux2 = aux->inicio;
+	// caso seja o primeiro
+	if (aux->inicio->coluna == coluna) {
+		aux->inicio = aux2->prox;
+		delete(aux2);
+		return true;
+	}
+	// buscando nnz	
+	while (aux2->prox->coluna != coluna && aux2->prox != NULL) {
+		aux2 = aux2->prox;
+	}
+	// caso nnz não encontrado
+	if (aux2->prox == NULL) {
+		return false;
+	}
+	// deletando nnz
+	Nnz* aux3 = aux2->prox;
+	aux2->prox = aux3->prox;
+	delete(aux3);
+	return true;
+}
+
 //bool altera_nnz(Mesparsa* matriz, int linha, int coluna, double info, double novo);
 
 void imprime_mesparsa(Mesparsa* matriz) {
