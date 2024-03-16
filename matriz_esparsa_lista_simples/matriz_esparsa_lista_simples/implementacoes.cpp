@@ -41,7 +41,7 @@ Mesparsa* cria_mesparsa() {
 
 //void libera_mesparsa(Mesparsa* matriz);
 
-bool insere_nnz(Linha* l, int linha, int coluna, double info) {
+bool insere_na_linha(Linha* l, int linha, int coluna, double info) {
 	// caso linha vazia
 	if (l->inicio == NULL) {
 		Nnz* n = cria_nnz(linha, coluna, info); // cria nnz
@@ -52,26 +52,51 @@ bool insere_nnz(Linha* l, int linha, int coluna, double info) {
 		l->inicio = n; // adiciona nnz a linha
 		return true;
 	}
-	// insere no inicio para teste
+	// insere na primeira posicao
+	if (l->inicio->coluna > coluna) {
+		Nnz* n = cria_nnz(linha, coluna, info); // cria nnz
+		if (!n) {
+			return false;
+		}
+		n->prox = l->inicio;
+		l->inicio = n;
+		return true;
+	}
+	Nnz* aux2 = l->inicio;
+	while (aux2->prox != NULL && aux2->prox->coluna < coluna) {
+		aux2 = aux2->prox;
+	}
+	// insere no final
+	if (aux2->prox == NULL) {
+		Nnz* n = cria_nnz(linha, coluna, info); // cria nnz
+		if (!n) {
+			return false;
+		}
+		aux2->prox = n;
+		return true;
+	}
+	// insere entre dois
 	Nnz* n = cria_nnz(linha, coluna, info); // cria nnz
-	if (!n) { // verifica alocação
+	if (!n) {
 		return false;
 	}
-	n->prox = l->inicio;
-	l->inicio = n; // adiciona nnz a linha
+	n->prox = aux2->prox;
+	aux2->prox = n;
 	return true;
 }
 
-bool insere_linha(Mesparsa* matriz, int linha, int coluna, double info) {
+bool insere_nnz(Mesparsa* matriz, int linha, int coluna, double info) {
 	if (!matriz) {
 		return false;
 	}
 	// caso matriz vazia
 	if (matriz->inicio == NULL) {
-		cout << "lista vazia" << endl;
 		Linha* l = cria_linha(linha); // cria matriz
+		if (!l) {
+			return false;
+		}
 		matriz->inicio = l; // adiciona linha a matriz
-		return insere_nnz(l, linha, coluna, info); // insere nnz na linha
+		return insere_na_linha(l, linha, coluna, info); // insere nnz na linha
 	}
 	// buscando posição da linha
 	Linha* aux = matriz->inicio; // ponteiro para primeira linha
@@ -81,30 +106,35 @@ bool insere_linha(Mesparsa* matriz, int linha, int coluna, double info) {
 	}
 	// insere na primeira posição
 	if (aux->linha > linha) {
-		cout << "inseriu no inicio" << endl;
 		Linha* l = cria_linha(linha);
+		if (!l) {
+			return false;
+		}
 		l->prox = aux;
 		matriz->inicio = l;
-		return insere_nnz(l, linha, coluna, info); // insere nnz na linha
+		return insere_na_linha(l, linha, coluna, info); // insere nnz na linha
 	}
 	// caso linha encontrada
 	if (aux->linha == linha) {
-		cout << "linha encontrada" << endl;
-		return insere_nnz(aux, linha, coluna, info); // insere nnz na linha
+		return insere_na_linha(aux, linha, coluna, info); // insere nnz na linha
 	}
 	// caso final da lista
 	if (aux->prox == NULL) {
-		cout << "final da lista" << endl;
 		Linha* l = cria_linha(linha);
+		if (!l) {
+			return false;
+		}
 		aux->prox = l;
-		return insere_nnz(l, linha, coluna, info); // insere nnz na linha
+		return insere_na_linha(l, linha, coluna, info); // insere nnz na linha
 	}
 	// caso limite insere após
-	cout << "inseriu no meio" << endl;
 	Linha* l = cria_linha(linha);
+	if (!l) {
+		return false;
+	}
 	l->prox = aux->prox;
 	aux->prox = l;
-	return insere_nnz(l, linha, coluna, info); // insere nnz na linha
+	return insere_na_linha(l, linha, coluna, info); // insere nnz na linha
 }
 
 //bool remove_nnz(Mesparsa* matriz, int linha, int coluna, double info);
