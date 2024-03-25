@@ -89,7 +89,7 @@ bool sai_da_fila(Fila* f, int* e) {
 
 int tamanho_da_fila(Fila* f) {
 	if (!f) {
-		return false;
+		return -1;
 	}
 	// caso fila vazia
 	if (f->fim == NULL) {
