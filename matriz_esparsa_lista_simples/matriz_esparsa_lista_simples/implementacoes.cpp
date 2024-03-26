@@ -78,13 +78,11 @@ void libera_mesparsa(Mesparsa** matriz) {
 	// liberando as linhas
 	if ((*matriz)->inicio != NULL) {		
 		Linha* aux = (*matriz)->inicio;
-		int ql = qtd_linhas((*matriz));
-		for (int i = 0; i < ql; i++) {
+		while (aux != NULL) {
 			// liberando os nnz
 			if (aux->inicio != NULL) {
 				Nnz* aux2 = aux->inicio;
-				int qnnz = qtd_nnz(aux);
-				for (int j = 0; j < qnnz; j++) {
+				while (aux2 != NULL) {
 					aux->inicio = aux2->prox;
 					delete(aux2);
 					aux2 = aux->inicio;
