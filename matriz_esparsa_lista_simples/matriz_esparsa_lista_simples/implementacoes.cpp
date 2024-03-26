@@ -111,12 +111,12 @@ bool insere_na_linha(Linha* l, int linha, int coluna, double info) {
 		l->inicio = n; // adiciona nnz a linha
 		return true;
 	}
+	Nnz* n = cria_nnz(linha, coluna, info); // cria nnz
+	if (!n) {
+		return false;
+	}
 	// insere na primeira posicao
 	if (l->inicio->coluna > coluna) {
-		Nnz* n = cria_nnz(linha, coluna, info); // cria nnz
-		if (!n) {
-			return false;
-		}
 		n->prox = l->inicio;
 		l->inicio = n;
 		return true;
@@ -127,18 +127,10 @@ bool insere_na_linha(Linha* l, int linha, int coluna, double info) {
 	}
 	// insere no final
 	if (aux2->prox == NULL) {
-		Nnz* n = cria_nnz(linha, coluna, info); // cria nnz
-		if (!n) {
-			return false;
-		}
 		aux2->prox = n;
 		return true;
 	}
-	// insere entre dois
-	Nnz* n = cria_nnz(linha, coluna, info); // cria nnz
-	if (!n) {
-		return false;
-	}
+	// insere entre dois	
 	n->prox = aux2->prox;
 	aux2->prox = n;
 	return true;
@@ -148,12 +140,12 @@ bool insere_nnz(Mesparsa* matriz, int linha, int coluna, double info) {
 	if (!matriz) {
 		return false;
 	}
+	Linha* l = cria_linha(linha); // cria linha
+	if (!l) {
+		return false;
+	}
 	// caso matriz vazia
 	if (matriz->inicio == NULL) {
-		Linha* l = cria_linha(linha); // cria matriz
-		if (!l) {
-			return false;
-		}
 		matriz->inicio = l; // adiciona linha a matriz
 		return insere_na_linha(l, linha, coluna, info); // insere nnz na linha
 	}
@@ -165,10 +157,6 @@ bool insere_nnz(Mesparsa* matriz, int linha, int coluna, double info) {
 	}
 	// insere na primeira posição
 	if (aux->linha > linha) {
-		Linha* l = cria_linha(linha);
-		if (!l) {
-			return false;
-		}
 		l->prox = aux;
 		matriz->inicio = l;
 		return insere_na_linha(l, linha, coluna, info); // insere nnz na linha
@@ -179,18 +167,10 @@ bool insere_nnz(Mesparsa* matriz, int linha, int coluna, double info) {
 	}
 	// caso final da lista
 	if (aux->prox == NULL) {
-		Linha* l = cria_linha(linha);
-		if (!l) {
-			return false;
-		}
 		aux->prox = l;
 		return insere_na_linha(l, linha, coluna, info); // insere nnz na linha
 	}
-	// caso limite insere após
-	Linha* l = cria_linha(linha);
-	if (!l) {
-		return false;
-	}
+	// caso limite insere após	
 	l->prox = aux->prox;
 	aux->prox = l;
 	return insere_na_linha(l, linha, coluna, info); // insere nnz na linha
