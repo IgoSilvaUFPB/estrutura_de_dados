@@ -7,6 +7,25 @@
 using std::cout;
 using std::endl;
 
+// implementação do TAD
+
+struct nnz {
+	double info;
+	int linha;
+	int coluna;
+	struct nnz* prox;
+};
+
+struct linha {
+	int linha;
+	struct nnz* inicio;
+	struct linha* prox;
+};
+
+struct mesparsa {
+	struct linha* inicio;
+};
+
 Nnz* cria_nnz(int linha, int coluna, double info) {
 	Nnz* n = new Nnz;
 	if (!n) {

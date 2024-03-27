@@ -1,22 +1,7 @@
 #ifndef PROTOTIPOS_H
 #define PROTOTIPOS_H
 
-struct nnz {
-	double info;
-	int linha;
-	int coluna;
-	struct nnz* prox;
-};
-
-struct linha {
-	int linha;
-	struct nnz* inicio;
-	struct linha* prox;
-};
-
-struct mesparsa {
-	struct linha* inicio;
-};
+// definição do TAD
 
 typedef struct nnz Nnz;
 typedef struct linha Linha;
