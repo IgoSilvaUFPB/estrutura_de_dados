@@ -41,7 +41,7 @@ int tamanho_lista(Lista* l) {
     if (aux->prox == NULL) {
 		return 1;
 	}
-    // percorre a lista até encontrar NULL
+    // percorre a lista atÃ© encontrar NULL
     i++;
     while (aux->prox != NULL) {
         aux = aux->prox;
@@ -71,23 +71,23 @@ bool insere_meio(Lista* l, int info, int pos)
     }
     // verifica o tamanho da lista
     int s = tamanho_lista(l);
-    // se a lista estiver vazia e a posição for maior ou igual a zero, insere no inicio
+    // se a lista estiver vazia e a posiÃ§Ã£o for maior ou igual a zero, insere no inicio
     if (l->inicio == NULL && pos >= 0) {
         return insere_inicio(l, info);
     }
-    // se a posição for menor que zero ou maior que o tamanho da lista, retorna falso
+    // se a posiÃ§Ã£o for menor que zero ou maior que o tamanho da lista, retorna falso
     if (pos < 0 || pos >= s) {
         return false;
     }
-    // se a posição for zero, insere no inicio
+    // se a posiÃ§Ã£o for zero, insere no inicio
     if (pos == 0) {
         return insere_inicio(l, info);
     }
-    // se a posição for igual ao tamanho da lista, insere no fim
+    // se a posiÃ§Ã£o for igual ao tamanho da lista, insere no fim
     if (pos == s) {
         return insere_fim(l, info);
     }
-    // se a lista tiver um elemento e a posição for zero, insere no inicio
+    // se a lista tiver um elemento e a posiÃ§Ã£o for zero, insere no inicio
     if (s == 1 && pos == 0) {
         return insere_inicio(l, info);
     }
@@ -96,7 +96,7 @@ bool insere_meio(Lista* l, int info, int pos)
     if (!novo_no) {
         return false;
     }
-    // percorre a lista até a posição desejada
+    // percorre a lista atÃ© a posiÃ§Ã£o desejada
     for (int i = 0; i < (pos - 1); i++) {
 		aux = aux->prox;
 	}    
@@ -114,13 +114,13 @@ bool insere_fim(Lista* l, int info) {
         return insere_inicio(l, info);
     }
     No* aux = l->inicio;
-    // percorre a lista até encontrar NULL
+    // percorre a lista atÃ© encontrar NULL
     while (aux->prox != NULL) {
         aux = aux->prox;
     }
-    // cria um novo nó e insere no final
+    // cria um novo nÃ³ e insere no final
     aux->prox = cria_no(info);
-    // verifica se o novo nó foi criado
+    // verifica se o novo nÃ³ foi criado
     return(aux->prox != NULL);
 }
 
@@ -147,11 +147,11 @@ bool remove_meio(Lista* l, int pos) {
         return false;
     }
     int s = tamanho_lista(l);
-    // se a posição for menor que zero ou maior que o tamanho da lista, retorna falso
+    // se a posiÃ§Ã£o for menor que zero ou maior que o tamanho da lista, retorna falso
     if (pos < 0 || pos > s) {
 		return false;
 	}
-    // se a posição for a mesma do tamanho da lista, remove o último
+    // se a posiÃ§Ã£o for a mesma do tamanho da lista, remove o Ãºltimo
     if (pos == s) {
         remove_fim(l);
     }    
@@ -162,7 +162,7 @@ bool remove_meio(Lista* l, int pos) {
 	}
     No* aux1 = l->inicio;
     No* aux2 = l->inicio;
-    // percorre a lista até a posição desejada
+    // percorre a lista atÃ© a posiÃ§Ã£o desejada
     for (int i = 0; i < (pos - 1); i++) {
         aux1 = aux1->prox;
     }
@@ -187,7 +187,7 @@ bool remove_fim(Lista* l) {
 		return true;
 	}
     No* aux = l->inicio;
-    // percorre a lista até encontrar o penultimo elemento
+    // percorre a lista atÃ© encontrar o penultimo elemento
     while (aux->prox->prox != NULL) {
         aux = aux->prox;
     }
@@ -207,7 +207,7 @@ bool remove_info(Lista* l, int info) {
     int s = tamanho_lista(l);
     No* aux1 = l->inicio;
     No* aux2 = l->inicio;
-    // caso só tenha um elemento e seja igual a info, remove o último
+    // caso sÃ³ tenha um elemento e seja igual a info, remove o Ãºltimo
     if (s == 1 && aux1->info == info) {
         remove_fim(l);
         return true;
@@ -217,7 +217,7 @@ bool remove_info(Lista* l, int info) {
         remove_inicio(l);
         return true;
     }
-    // percorre a lista até encontrar o elemento desejado
+    // percorre a lista atÃ© encontrar o elemento desejado
     while (aux1->prox->info != info) {
         aux1 = aux1->prox;
     }
@@ -239,7 +239,7 @@ bool remove_info_all(Lista* l, int info) {
     cout << "tamanho da lista: " << s << endl;
     No* aux1 = l->inicio;
     No* aux2 = l->inicio;
-    // caso só tenha um elemento e seja igual a info, remove o último
+    // caso sÃ³ tenha um elemento e seja igual a info, remove o Ãºltimo
     if (s == 1 && aux1->info == info) {
         remove_fim(l);
         return true;
@@ -248,10 +248,10 @@ bool remove_info_all(Lista* l, int info) {
     while (l->inicio->info == info) {
         cout << "removido do inicio" << endl;
         remove_inicio(l);
-        // necessário atualizar o aux1 se o primeiro for removido
+        // necessÃ¡rio atualizar o aux1 se o primeiro for removido
         aux1 = l->inicio;
     }
-    // removendo a partir do segundo elemento o que for igual a info até o final
+    // removendo a partir do segundo elemento o que for igual a info atÃ© o final
     while (aux1->prox != NULL) {
         if (aux1->prox->info == info) {
 			aux2 = aux1->prox;
@@ -270,10 +270,10 @@ No* busca_no(Lista* l, int info) {
         return NULL;
     }
     No* aux = l->inicio;
-    // percorre a lista até encontrar o elemento desejado
+    // percorre a lista atÃ© encontrar o elemento desejado
     while (aux != NULL) {
         if (aux->info == info) {
-            // retorna o ponteiro para o nó desejado
+            // retorna o ponteiro para o nÃ³ desejado
             return aux;
         }
         aux = aux->prox;
@@ -282,13 +282,13 @@ No* busca_no(Lista* l, int info) {
 }
 
 bool modifica_no(Lista* l, int info, int novo_info) {
-    // busca o nó desejado
+    // busca o nÃ³ desejado
     No* aux = busca_no(l, info);
-    // se não encontrar a informação, retorna falso
+    // se nÃ£o encontrar a informaÃ§Ã£o, retorna falso
     if (!aux) {
         return false;
     }
-    // modifica a informação
+    // modifica a informaÃ§Ã£o
     aux->info = novo_info;
     return true;
 }
@@ -316,13 +316,64 @@ void libera_lista(Lista** l) {
     if (!(*l)) {
         return;
     }
-    // libera todos os nós da lista
+    // libera todos os nÃ³s da lista
     while ((*l)->inicio != NULL) {
         remove_inicio(*l);
     }
     // libera a lista
     free(*l);
     *l = NULL;
+}
+
+bool concatena_listas(Lista* l1, Lista* l2) {
+    if (!l1 || !l2) {
+        return false;
+    }
+    // lista 2 Ã© vazia
+    if (l2->inicio == NULL) {
+        return false;
+    }
+    if (l1->inicio != NULL) {
+        No* aux1 = l1->inicio;
+        // mover auxiliar para o final da lista 1    
+        while (aux1->prox != NULL) {
+            aux1 = aux1->prox;
+        }
+        aux1->prox = l2->inicio;
+        l2->inicio = NULL;
+    }
+    else {
+        // caso lista 1 vazia
+        l1->inicio = l2->inicio;
+        l2->inicio = NULL;
+    }
+    return true;
+}
+
+bool inverte_lista(Lista* l) {
+    if (!l) {
+        return false;
+    }
+    // lista vazia
+    if (l->inicio == NULL) {
+        return false;
+    }
+    // lista com apenas um elemento
+    if (l->inicio->prox == NULL) {
+        return false;
+    }
+    No* aux1 = l->inicio;
+    l->inicio = aux1->prox;
+    aux1->prox = NULL;
+    No* aux2 = l->inicio;
+    while (l->inicio->prox != NULL) {
+        l->inicio = aux2->prox;
+        aux2->prox = aux1;
+        aux1 = aux2;
+        aux2 = l->inicio;
+    }
+    l->inicio->prox = aux1;
+    return true;
 }
 
 #endif
