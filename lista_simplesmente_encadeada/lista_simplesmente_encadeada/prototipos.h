@@ -42,5 +42,9 @@ void imprime_lista(Lista* l);
 
 void libera_lista(Lista** l);
 
+bool concatena_listas(Lista* l1, Lista* l2);
+
+bool inverte_lista(Lista* l);
+
 #endif
 
