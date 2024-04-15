@@ -5,8 +5,6 @@ using std::cout;
 using std::endl;
 
 int main(void) {
-	// na remoção da raiz a referência de toda a parte esquerda está se perdendo
-
 	// criando árvore
 	Arvore* a = cria_arvore(10);
 	// inserindo na árvore
@@ -22,6 +20,9 @@ int main(void) {
 	insere_arvore(&a, 8);
 	insere_arvore(&a, 2);
 	insere_arvore(&a, 4);
+	insere_arvore(&a, 14);
+	insere_arvore(&a, 13);
+	insere_arvore(&a, 16);
 	// imprimindo árvore
 	cout << "Impressao PRE:" << endl;
 	imprime_pre(a);
@@ -35,7 +36,7 @@ int main(void) {
 	cout << endl << "Resultado da busca: " << resultado->info << endl;
 	// removendo da árvore
 	int removido;
-	remove_arvore(&a, 10, &removido);
+	remove_arvore(&a, 15, &removido);
 	cout << "Removido: " << removido << endl;
 	// imprimindo após remoção
 	imprime_pre(a);
