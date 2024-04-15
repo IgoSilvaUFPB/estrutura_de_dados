@@ -4,6 +4,7 @@
 
 
 using std::cout;
+using std::endl;
 
 Arvore* cria_arvore(int info) {
 	Arvore* a = (Arvore*)malloc(sizeof(Arvore));
@@ -43,11 +44,72 @@ bool insere_arvore(Arvore** a, int info) {
 	else if (info > (*a)->info) { // caso insira à direita
 		return insere_arvore(&(*a)->dir, info);
 	}
-	return true;
 }
 
-bool remove_arvore(Arvore* a, int info) {
-	return false;
+bool remove_arvore(Arvore** a, int info, int* deletado) {
+	if (!(*a)) { // caso não encontrado, e fim da árvore
+		return false;
+	}
+	if ((*a)->info == info) { // caso encontrado
+		*deletado = (*a)->info;
+		if (!(*a)->esq && !(*a)->dir ) { // caso não haja subárvores			
+			free((*a));
+			*a = NULL;
+			return true;
+		}
+		else if ((*a)->esq) { // remove o maior da subárvore a esquerda
+			Arvore** aux = &(*a)->esq;
+			Arvore** aux2 = &(*a)->esq;
+			while ((*aux)->dir != NULL) { // busca maior da subárvore a esquerda
+				aux2 = aux;
+				aux = &(*aux)->dir;
+			}
+			cout << "aux: " << (*aux)->info << endl;
+			cout << "aux2: " << (*aux2)->info << endl;
+			if ((*aux)->esq) { // caso o maior tenha subárvores a esquerda
+				(*a)->info = (*aux)->info;
+				(*aux2)->dir = (*aux)->esq;
+				free((*aux));
+				*aux = NULL;
+				cout << "1" << endl;
+				return true;
+			}
+			else { // caso não tenha subárvores
+				(*a)->info = (*aux)->info;
+				free((*aux));
+				*aux = NULL;
+				cout << "2" << endl;
+				return true;
+			}
+		}
+		else { // remove o menor da subárvore a direita
+			Arvore** aux = &(*a)->dir;
+			Arvore** aux2 = &(*a)->dir;
+			while ((*aux)->esq) { // busca menor da subárvore a direita
+				aux2 = aux;
+				aux = &(*aux)->esq;
+			}
+			if ((*aux)->dir) { // caso o menor tenha subárvores a direita
+				(*a)->info = (*aux)->info;
+				(*aux2)->esq = (*aux)->dir;				
+				free((*aux));
+				*aux = NULL;
+				return true;
+			}
+			else { // caso não tenha subárvores
+				(*a)->info = (*aux)->info;
+				free((*aux));
+				*aux = NULL;
+				return true;
+			}
+		}
+	}
+	if (info < (*a)->info) { // caso não encontrado, e menor
+		return remove_arvore(&(*a)->esq, info, deletado);
+	}
+	else if (info > (*a)->info) { // caso não encontrado, e maior
+		return remove_arvore(&(*a)->dir, info, deletado);
+	}
 }
 
 void imprime_pre(Arvore* a) {
