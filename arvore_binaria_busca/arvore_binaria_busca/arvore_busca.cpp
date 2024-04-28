@@ -4,6 +4,12 @@
 using std::cout;
 using std::endl;
 
+struct arvore {
+	int info;
+	struct arvore* esq;
+	struct arvore* dir;
+};
+
 Arvore* cria_arvore(int info) {
 	Arvore* a = (Arvore*)malloc(sizeof(Arvore));
 	if (!a) {
@@ -19,64 +25,64 @@ void libera_arvore(Arvore** a) {
 	if ((*a) == NULL) {
 		return;
 	}
-	libera_arvore(&(*a)->esq);	
-	libera_arvore(&(*a)->dir);	
+	libera_arvore(&(*a)->esq);
+	libera_arvore(&(*a)->dir);
 	free((*a));
 	*a = NULL;
 }
 
 bool insere_arvore(Arvore** a, int info) {
-	if (!(*a)) { // caso ·rvore n„o exista
+	if (!(*a)) { // caso √°rvore n√£o exista
 		Arvore* nova = cria_arvore(info);
 		if (!nova) {
 			return false;
 		}
 		(*a) = nova;
-	}	
-	if ((*a)->info == info) { // caso a info j· exista na ·rvore
+	}
+	if ((*a)->info == info) { // caso a info j√° exista na √°rvore
 		return false;
 	}
-	if (info < (*a)->info) { // caso insira ‡ esquerda
+	if (info < (*a)->info) { // caso insira √† esquerda
 		return insere_arvore(&(*a)->esq, info);
 	}
-	else if (info > (*a)->info) { // caso insira ‡ direita
+	else if (info > (*a)->info) { // caso insira √† direita
 		return insere_arvore(&(*a)->dir, info);
 	}
 }
 
 bool remove_arvore(Arvore** a, int info, int* deletado) {
-	if (!(*a)) { // caso n„o encontrado, e fim da ·rvore
+	if (!(*a)) { // caso n√£o encontrado, e fim da √°rvore
 		return false;
 	}
 	if ((*a)->info == info) { // caso encontrado
 		*deletado = (*a)->info;
-		if (!(*a)->esq && !(*a)->dir ) { // caso n„o haja sub·rvores			
+		if (!(*a)->esq && !(*a)->dir) { // caso n√£o haja sub√°rvores			
 			free((*a));
 			*a = NULL;
 			return true;
 		}
-		else if ((*a)->esq) { // remove o maior da sub·rvore a esquerda
+		else if ((*a)->esq) { // remove o maior da sub√°rvore a esquerda
 			Arvore* aux = (*a)->esq;
 			Arvore* aux2 = (*a)->esq;
-			while (aux->dir != NULL) { // busca maior da sub·rvore a esquerda
+			while (aux->dir != NULL) { // busca maior da sub√°rvore a esquerda
 				aux2 = aux;
 				aux = aux->dir;
 			}
-			if (aux == aux2) { // caso sÛ tenha uma ·rvore ‡ esquerda
+			if (aux == aux2) { // caso s√≥ tenha uma √°rvore √† esquerda
 				(*a)->info = aux->info;
 				(*a)->esq = NULL;
 				free(aux);
 				aux = NULL;
 				return true;
 			}
-			if (aux->esq) { // caso o maior tenha sub·rvores a esquerda
+			if (aux->esq) { // caso o maior tenha sub√°rvores a esquerda
 				(*a)->info = aux->info;
 				aux2->dir = aux->esq;
 				free(aux);
 				aux = NULL;
 				return true;
 			}
-			else { // caso n„o tenha sub·rvores
+			else { // caso n√£o tenha sub√°rvores
 				(*a)->info = aux->info;
 				aux2->dir = NULL;
 				free(aux);
@@ -84,28 +90,28 @@ bool remove_arvore(Arvore** a, int info, int* deletado) {
 				return true;
 			}
 		}
-		else { // remove o menor da sub·rvore a direita
+		else { // remove o menor da sub√°rvore a direita
 			Arvore* aux = (*a)->dir;
 			Arvore* aux2 = (*a)->dir;
-			while (aux->esq != NULL) { // busca menor da sub·rvore a direita
+			while (aux->esq != NULL) { // busca menor da sub√°rvore a direita
 				aux2 = aux;
 				aux = aux->esq;
 			}
-			if (aux == aux2) { // caso sÛ tenha uma ·rvore ‡ esquerda
+			if (aux == aux2) { // caso s√≥ tenha uma √°rvore √† esquerda
 				(*a)->info = aux->info;
 				(*a)->dir = NULL;
 				free(aux);
 				aux = NULL;
 				return true;
 			}
-			if (aux->dir) { // caso o menor tenha sub·rvores a direita
+			if (aux->dir) { // caso o menor tenha sub√°rvores a direita
 				(*a)->info = aux->info;
 				aux2->esq = aux->dir;
 				free(aux);
 				aux = NULL;
 				return true;
 			}
-			else { // caso n„o tenha sub·rvores
+			else { // caso n√£o tenha sub√°rvores
 				(*a)->info = aux->info;
 				aux2->esq = NULL;
 				free(aux);
@@ -114,10 +120,10 @@ bool remove_arvore(Arvore** a, int info, int* deletado) {
 			}
 		}
 	}
-	if (info < (*a)->info) { // caso n„o encontrado, e menor
+	if (info < (*a)->info) { // caso n√£o encontrado, e menor
 		return remove_arvore(&(*a)->esq, info, deletado);
 	}
-	else if (info > (*a)->info) { // caso n„o encontrado, e maior
+	else if (info > (*a)->info) { // caso n√£o encontrado, e maior
 		return remove_arvore(&(*a)->dir, info, deletado);
 	}
 }
@@ -137,7 +143,7 @@ void imprime_pos(Arvore* a) {
 	}
 	imprime_pos(a->esq);
 	imprime_pos(a->dir);
-	cout << "[" << a->info << "]";	
+	cout << "[" << a->info << "]";
 }
 
 void imprime_simetrico(Arvore* a) {
@@ -160,4 +166,8 @@ Arvore* busca_arvore(Arvore* a, int info) {
 		return busca_arvore(a->dir, info);
 	}
 	return a;
+}
+
+int get_info(Arvore* a) {
+	return a->info;
 }
