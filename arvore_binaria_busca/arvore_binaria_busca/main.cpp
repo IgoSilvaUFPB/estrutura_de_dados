@@ -5,9 +5,9 @@ using std::cout;
 using std::endl;
 
 int main(void) {
-	// criando árvore
+	// criando Ã¡rvore
 	Arvore* a = cria_arvore(10);
-	// inserindo na árvore
+	// inserindo na Ã¡rvore
 	insere_arvore(&a, 5);
 	insere_arvore(&a, 15);
 	insere_arvore(&a, 3);
@@ -23,7 +23,7 @@ int main(void) {
 	insere_arvore(&a, 14);
 	insere_arvore(&a, 13);
 	insere_arvore(&a, 16);
-	// imprimindo árvore
+	// imprimindo Ã¡rvore
 	cout << "Impressao PRE:" << endl;
 	imprime_pre(a);
 	cout << endl << "Impressao POS:" << endl;
@@ -31,16 +31,16 @@ int main(void) {
 	cout << endl << "Impressao SIMETRICA:" << endl;
 	imprime_simetrico(a);
 	cout << endl;
-	// buscando na árvore
+	// buscando na Ã¡rvore
 	Arvore* resultado = busca_arvore(a, 11);
-	cout << endl << "Resultado da busca: " << resultado->info << endl;
-	// removendo da árvore
+	cout << endl << "Resultado da busca: " << get_info(resultado) << endl;
+	// removendo da Ã¡rvore
 	int removido;
 	remove_arvore(&a, 15, &removido);
 	cout << "Removido: " << removido << endl;
-	// imprimindo após remoção
+	// imprimindo apÃ³s remoÃ§Ã£o
 	imprime_pre(a);
-	// liberando árvore
+	// liberando Ã¡rvore
 	libera_arvore(&a);
 	return 0;
 }
