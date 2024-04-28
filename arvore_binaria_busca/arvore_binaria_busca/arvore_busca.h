@@ -1,13 +1,8 @@
 #ifndef ARVORE_BUSCA_H
 #define ARVORE_BUSCA_H
 
+struct arvore;
 typedef struct arvore Arvore;
-
-struct arvore {
-	int info;
-	struct arvore* esq;
-	struct arvore* dir;
-};
 
 Arvore* cria_arvore(int info);
 void libera_arvore(Arvore** a);
@@ -17,5 +12,6 @@ void imprime_pre(Arvore* a);
 void imprime_pos(Arvore* a);
 void imprime_simetrico(Arvore* a);
 Arvore* busca_arvore(Arvore* a, int info);
+int get_info(Arvore* a);
 
 #endif
