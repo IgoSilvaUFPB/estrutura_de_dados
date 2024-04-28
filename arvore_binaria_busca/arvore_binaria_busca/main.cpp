@@ -34,6 +34,11 @@ int main(void) {
 	// buscando na árvore
 	Arvore* resultado = busca_arvore(a, 11);
 	cout << endl << "Resultado da busca: " << get_info(resultado) << endl;
+	/*
+ 	cout << endl << "Resultado da busca: " << resultado->info << endl;
+	A linha acima não funciona porque o main.cpp não tem acesso direto
+	à definição do struct arvore.
+	*/
 	// removendo da árvore
 	int removido;
 	remove_arvore(&a, 15, &removido);
