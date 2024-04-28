@@ -1,13 +1,13 @@
 #ifndef ARVORE_BUSCA_H
 #define ARVORE_BUSCA_H
 
+typedef struct arvore Arvore;
+
 struct arvore {
 	int info;
 	struct arvore* esq;
 	struct arvore* dir;
 };
-
-typedef struct arvore Arvore;
 
 Arvore* cria_arvore(int info);
 void libera_arvore(Arvore** a);
